@@ -85,6 +85,9 @@ public class StreamThread extends Thread{
                 while( !mp3_player.isComplete() ){
                     Thread.yield();
                 }
+
+                
+
             }
             else if( url.getFile().endsWith( ".wav" ) ||
                 url.getFile().endsWith( ".aiff" ) ||
