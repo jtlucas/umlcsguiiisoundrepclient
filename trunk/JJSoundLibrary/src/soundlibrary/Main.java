@@ -90,11 +90,11 @@ public class Main extends JFrame implements WindowListener{
                         player_thread = new java.lang.Thread(stream_thread);
                         player_thread.start();
                         
-                       // stream_thread = null;
+                        stream_thread = null;
                     }
-//                   else{
-//                       stream_thread.setStream( stream_url );
-//                   }
+                   else{
+                       stream_thread.setStream( stream_url );
+                   }
                    updateStatusText( "Streaming: " + tableModel.getValueAt( dataTable.getSelectedRow(), 0 ) );
 
                    
