@@ -28,6 +28,9 @@ public class Main extends JFrame implements WindowListener{
     private JTable dataTable;
     private DefaultTableModel tableModel;
     private Vector<String> columnNames;
+
+    //added by Jerron, seperate Thread for playing music.
+    private Thread player_thread;
     
     private Vector<SoundLibraryEntry> stored_results;
     
@@ -72,14 +75,34 @@ public class Main extends JFrame implements WindowListener{
                //stop_button.setEnabled( true );
                try{
                    URL stream_url = stored_results.elementAt( dataTable.getSelectedRow() ).getURL();
-                   if( stream_thread == null ){
-                       stream_thread = new StreamThread( stream_url );
-                   }
-                   else{
-                       stream_thread.setStream( stream_url );
-                   }
+
+                   //Daniel's code, left in
+//                   if( stream_thread == null ){
+//                       stream_thread = new StreamThread( stream_url );
+//                   }
+//                   else{
+//                       stream_thread.setStream( stream_url );
+//                   }
+//                   updateStatusText( "Streaming: " + tableModel.getValueAt( dataTable.getSelectedRow(), 0 ) );
+                    //playing
+                    if(stream_thread == null){
+                        stream_thread = new StreamThread( stream_url );
+                        player_thread = new java.lang.Thread(stream_thread);
+                        player_thread.start();
+                        
+                       // stream_thread = null;
+                    }
+//                   else{
+//                       stream_thread.setStream( stream_url );
+//                   }
                    updateStatusText( "Streaming: " + tableModel.getValueAt( dataTable.getSelectedRow(), 0 ) );
-                   stream_thread.run();
+
+                   
+                   //stream_thread.run();
+
+
+
+
                }
                catch( Exception exception ){
                    System.err.println( exception );
