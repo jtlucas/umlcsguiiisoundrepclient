@@ -69,41 +69,39 @@ public class MainFrame extends javax.swing.JFrame {
 
     jTable.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
-        {null, null, null, null, null},
-        {null, null, null, null, null},
-        {null, null, null, null, null},
-        {null, null, null, null, null}
+        {null, null, null, null},
+        {null, null, null, null},
+        {null, null, null, null},
+        {null, null, null, null}
       },
       new String [] {
-        "File", "a", "b", "d", "f"
+        "Title 1", "Title 2", "Title 3", "Title 4"
       }
     ));
     jScrollPane1.setViewportView(jTable);
 
     addStreamButton.setText("Play Stream");
-    addStreamButton.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        addStreamButtonActionPerformed(evt);
-      }
-    });
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addGap(33, 33, 33)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(addStreamButton)
-          .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addContainerGap(97, Short.MAX_VALUE))
+          .addGroup(layout.createSequentialGroup()
+            .addGap(91, 91, 91)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addGroup(layout.createSequentialGroup()
+            .addGap(20, 20, 20)
+            .addComponent(addStreamButton)))
+        .addContainerGap(116, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addGap(43, 43, 43)
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+        .addGap(28, 28, 28)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
         .addComponent(addStreamButton)
         .addContainerGap())
     );
