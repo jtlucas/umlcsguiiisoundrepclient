@@ -103,20 +103,21 @@ public class JMSearchPanel extends javax.swing.JPanel {
 
     private void jcbSearchingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSearchingActionPerformed
         // TODO add your handling code here:
-        Object o = jcbSearching.getSelectedItem();
-        if(o == "Title"){
+        int sel = jcbSearching.getSelectedIndex();
+        System.out.println(sel);
+        if(sel == 0){
             current_search = search_type.TITLE;
         }
-        else if(o == "Artist"){
+        else if(sel == 1){
             current_search = search_type.AUTHOR;
         }
-        else if(o == "Genre"){
+        else if(sel == 2){
             current_search = search_type.GENRE;
         }
-        else if(o == "Tags"){
+        else if(sel == 3){
             current_search = search_type.TAGS;
         }
-        else if(o == "Custom"){
+        else if(sel == 4){
             current_search = search_type.CUSTOM;
         }
 }//GEN-LAST:event_jcbSearchingActionPerformed
@@ -148,7 +149,7 @@ public class JMSearchPanel extends javax.swing.JPanel {
                         break;
                     }
                     results = query.executeQuery();
-//                    Main.Singleton.updateFromSearch( results );
+//                    JMMusicMain.Singleton.updateFromSearch( results );
                     }
             }
                catch( Exception exception ){
