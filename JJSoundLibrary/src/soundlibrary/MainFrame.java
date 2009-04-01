@@ -11,15 +11,45 @@
 
 package soundlibrary;
 
+import edu.uml.sl.SoundLibraryEntry;
+import edu.uml.sl.SoundLibraryQuery;
+import java.net.URL;
+import java.util.Vector;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Jerron
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    private Vector<String> columnNames;
+    private DefaultTableModel tableModel;
+    private JTable dataTable;
+    private StreamThread stream_thread;
+    private Vector<SoundLibraryEntry> stored_results;
+
     /** Creates new form MainFrame */
     public MainFrame() {
+
+        columnNames = new Vector<String>();
+        columnNames.add( "Title" );
+        columnNames.add( "Artist" );
+        columnNames.add( "Genre" );
+        columnNames.add( "Tags" );
+        columnNames.add( "Mime Type" );
+
+        Vector<Vector<String>> entries = new Vector<Vector<String>>();
+        tableModel = new DefaultTableModel( entries, columnNames );
+        
+        
+        
+
         initComponents();
+        load();
+
+        jTable.setModel(tableModel);
     }
 
     /** This method is called from within the constructor to
@@ -31,21 +61,100 @@ public class MainFrame extends javax.swing.JFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
+    jScrollPane1 = new javax.swing.JScrollPane();
+    jTable = new javax.swing.JTable();
+    addStreamButton = new javax.swing.JButton();
+
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+    jTable.setModel(new javax.swing.table.DefaultTableModel(
+      new Object [][] {
+        {null, null, null, null, null},
+        {null, null, null, null, null},
+        {null, null, null, null, null},
+        {null, null, null, null, null}
+      },
+      new String [] {
+        "File", "a", "b", "d", "f"
+      }
+    ));
+    jScrollPane1.setViewportView(jTable);
+
+    addStreamButton.setText("Play Stream");
+    addStreamButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addStreamButtonActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 400, Short.MAX_VALUE)
+      .addGroup(layout.createSequentialGroup()
+        .addGap(33, 33, 33)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(addStreamButton)
+          .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addContainerGap(97, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 300, Short.MAX_VALUE)
+      .addGroup(layout.createSequentialGroup()
+        .addGap(43, 43, 43)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+        .addComponent(addStreamButton)
+        .addContainerGap())
     );
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
+
+    private void addStreamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStreamButtonActionPerformed
+         try{
+               URL stream_url = stored_results.elementAt( jTable.getSelectedRow() ).getURL();
+
+                if(stream_thread != null){
+                    stream_thread.requestStop();
+                }
+
+                stream_thread = new StreamThread( stream_url );
+                stream_thread.start();
+
+//               updateStatusText( "Streaming: " + tableModel.getValueAt( dataTable.getSelectedRow(), 0 ) );
+
+
+           }
+           catch( Exception exception ){
+               System.err.println( exception );
+           }
+}//GEN-LAST:event_addStreamButtonActionPerformed
+
+    public void load(){
+        try{
+            //SoundLibraryQuery query = new SoundLibraryQuery( "SELECT * FROM library WHERE MATCH (Tags) AGAINST ('plop' IN BOOLEAN MODE)" );
+            SoundLibraryQuery query = new SoundLibraryQuery();
+            Vector<SoundLibraryEntry> results = query.executeQuery();
+            stored_results = results;
+            //for( SoundLibraryEntry entry: results ){
+            //    System.out.println( entry.getURL().toURI() + " " + entry.getTitle() + " " + entry.getAuthor() + " " + entry.getGenre() + " " + entry.getTags() );
+            //}
+            for( SoundLibraryEntry entry: results ){
+                Vector<String> new_row = new Vector<String>();
+                new_row.add( entry.getTitle() );
+                new_row.add( entry.getAuthor() );
+                new_row.add( entry.getGenre() );
+                new_row.add( entry.getTags() );
+                new_row.add( entry.getMimeType() );
+
+                tableModel.addRow( new_row );
+            }
+        }
+        catch( Exception ex ){
+           System.err.println( ex );
+        }
+    }
 
     /**
     * @param args the command line arguments
@@ -59,6 +168,9 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton addStreamButton;
+  private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JTable jTable;
   // End of variables declaration//GEN-END:variables
 
 }
