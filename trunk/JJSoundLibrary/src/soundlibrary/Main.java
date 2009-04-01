@@ -177,15 +177,14 @@ public class Main extends JFrame implements WindowListener{
     }
 
     public void stopAudio(){
-//        if( stream_thread != null ) stream_thread.requestStop();
-        if(stream_thread != null){
-        stream_thread.requestStop();
+        if( stream_thread != null ) stream_thread.requestStop();
 
-        try {
-         stream_thread.join();
-        }
-        catch ( java.lang.InterruptedException e ){}
-        }
+
+       // try {
+        // stream_thread.join();
+       // }
+        //catch ( java.lang.InterruptedException e ){}
+       // }
     }
 
     public void updateFromSearch( Vector<SoundLibraryEntry> results ){
@@ -215,8 +214,9 @@ public class Main extends JFrame implements WindowListener{
     public void windowOpened(WindowEvent arg0) {}
 
     public void windowClosing(WindowEvent arg0) {
-        //stopAudio();
+        stopAudio();
         if( isDisplayable() ) dispose();
+        System.exit(0);
     }
 
     public void windowClosed(WindowEvent arg0) {}
