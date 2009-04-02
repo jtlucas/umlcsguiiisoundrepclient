@@ -30,6 +30,7 @@ public class JMUploadPanel extends javax.swing.JPanel {
     public JMUploadPanel() {
         initComponents();
         jfc.addChoosableFileFilter(new SoundFilter());
+        jlblMessage.setText("Please select a file");
     }
 
     public void actionPerformed(ActionEvent e){
@@ -42,6 +43,7 @@ public class JMUploadPanel extends javax.swing.JPanel {
         }
 
         if(e.getSource() == jbttnUpload){
+            jlblMessage.setText("Please wait...");
             SoundLibraryUpload update = new SoundLibraryUpload();
             update.setFilePath( jtfFile.getText() );
             update.setTitle( jtfTitle.getText() );
@@ -60,7 +62,11 @@ public class JMUploadPanel extends javax.swing.JPanel {
             }
             catch( Exception exception ){
                 System.err.println( exception.getMessage() );
+                jlblMessage.setForeground(Color.RED);
+                jlblMessage.setText(exception.getMessage());
             }
+            jlblMessage.setForeground(Color.BLACK);
+            jlblMessage.setText("Completed, please enter another file");
         }
     }
 
