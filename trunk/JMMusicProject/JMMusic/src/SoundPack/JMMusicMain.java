@@ -26,17 +26,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
 
-    private JTabbedPane main_panel;
+//    private JTabbedPane main_panel;
 
-    private JLabel progress_text;
-    private JButton stream_button;
-    private JButton stop_button;
-    private JButton reload;
+//    private JLabel progress_text;
+//    private JButton stream_button;
+//    private JButton stop_button;
+//    private JButton reload;
 
     private StreamThread stream_thread = null;
 //    private Thread player_thread = null;
 
-    private JTable dataTable;
+//    private JTable dataTable;
     private DefaultTableModel tableModel;
     private Vector<String> columnNames;
 
@@ -136,7 +136,7 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
         });
 
         //Create the status box and add it to the main panel
-        progress_text = new JLabel();
+//        progress_text = new JLabel();
         progress_text.setText( "Stopped." );
         JPanel containPanel = new JPanel();
         stop_button.setEnabled(false);
@@ -208,17 +208,72 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
+    main_panel = new javax.swing.JTabbedPane();
+    jScrollPane1 = new javax.swing.JScrollPane();
+    dataTable = new javax.swing.JTable();
+    stream_button = new javax.swing.JButton();
+    stop_button = new javax.swing.JButton();
+    reload = new javax.swing.JButton();
+    progress_text = new javax.swing.JLabel();
+
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+    dataTable.setModel(new javax.swing.table.DefaultTableModel(
+      new Object [][] {
+        {null, null, null, null},
+        {null, null, null, null},
+        {null, null, null, null},
+        {null, null, null, null}
+      },
+      new String [] {
+        "Title 1", "Title 2", "Title 3", "Title 4"
+      }
+    ));
+    jScrollPane1.setViewportView(dataTable);
+
+    main_panel.addTab("tab1", jScrollPane1);
+
+    stream_button.setText("Play");
+
+    stop_button.setText("Stop");
+
+    reload.setText("Reload");
+
+    progress_text.setText("jLabel1");
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 555, Short.MAX_VALUE)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(stream_button)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(stop_button)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(reload)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(progress_text))
+          .addComponent(main_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addContainerGap(52, Short.MAX_VALUE))
     );
+
+    layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {reload, stop_button, stream_button});
+
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 349, Short.MAX_VALUE)
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(main_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(stream_button)
+          .addComponent(stop_button)
+          .addComponent(reload)
+          .addComponent(progress_text))
+        .addContainerGap())
     );
 
     pack();
@@ -310,6 +365,13 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
     public void windowDeactivated(WindowEvent arg0) {}
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JTable dataTable;
+  private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JTabbedPane main_panel;
+  private javax.swing.JLabel progress_text;
+  private javax.swing.JButton reload;
+  private javax.swing.JButton stop_button;
+  private javax.swing.JButton stream_button;
   // End of variables declaration//GEN-END:variables
 
 }
