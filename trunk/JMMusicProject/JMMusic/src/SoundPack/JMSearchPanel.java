@@ -29,7 +29,7 @@ public class JMSearchPanel extends javax.swing.JPanel {
 //    private Object jbttnSearch;
 //    private Object jlblFind;
     private enum search_type{TITLE, AUTHOR, GENRE, TAGS, CUSTOM}
-    private search_type current_search = search_type.CUSTOM;
+    private search_type current_search = search_type.TITLE;
 
 
     /** Creates new form JMSearchPanel */
@@ -76,13 +76,13 @@ public class JMSearchPanel extends javax.swing.JPanel {
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jlblSearchBy)
-          .addComponent(jtfSearchText, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
           .addComponent(jlblFind)
           .addComponent(jbttnSearch)
-          .addComponent(jcbSearching, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addContainerGap(281, Short.MAX_VALUE))
+          .addComponent(jtfSearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jcbSearching, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addContainerGap(88, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +149,7 @@ public class JMSearchPanel extends javax.swing.JPanel {
                         break;
                     }
                     results = query.executeQuery();
-//                    JMMusicMain.Singleton.updateFromSearch( results );
+                    JMMusicMain.Singleton.updateFromSearch( results );
                     }
             }
                catch( Exception exception ){
