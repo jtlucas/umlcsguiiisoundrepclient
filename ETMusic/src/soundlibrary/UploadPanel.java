@@ -1,18 +1,19 @@
 package soundlibrary;
 
+import edu.uml.sl.*;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.Vector;
-import javax.swing.ButtonGroup;
+import java.net.URL;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * Based off of demo from: http://java.sun.com/docs/books/tutorial/uiswing/examples/components/FileChooserDemoProject/src/components/FileChooserDemo.java
@@ -81,14 +82,24 @@ public class UploadPanel extends JPanel implements ActionListener{
         }
         if( e.getSource() == upload_button ){
             SoundLibraryUpload update = new SoundLibraryUpload();
+            //SoundLibraryUpdate update = new SoundLibraryUpdate();
             update.setFilePath( file_path.getText() );
             update.setTitle( title.getText() );
             update.setAuthor( author.getText() );
             update.setGenre( genre.getText() );
             update.setTags( tags.getText() );
+            
             //Now to send the update
             try{
+                //update.setEntry( new SoundLibraryEntry( new URL( "http://www.foo.com" ), title.getText(), author.getText(), genre.getText(), tags.getText(), "date", "00000036" ) );
                 update.executeUpload();
+                //if( !update.executeUpdate() ) System.out.println( "Update Failed." );
+                //else System.out.println( "Update Succeeded." );
+                NodeList warnings = update.getReply().getElementsByTagName( "Warning" );
+                 for (int i = 0; i < warnings.getLength(); i++) {
+                    Node entry = warnings.item(i);
+                    System.out.println( entry.getTextContent() );
+                 }
             }
             catch( Exception exception ){
                 System.err.println( exception.getMessage() );

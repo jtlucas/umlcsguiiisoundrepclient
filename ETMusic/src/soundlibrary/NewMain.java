@@ -11,23 +11,38 @@
 
 package soundlibrary;
 
+import java.net.URL;
 import java.util.Vector;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Jim Ebert
+ * @authors Jim Ebert and Elizabeth Tran
  */
 public class NewMain extends javax.swing.JFrame {
 
+    /**
+     * A vector of the column names to the table model  dtm
+     */
     private Vector<String> columnNames = new Vector<String>();
-    private DefaultTableModel dtm = new DefaultTableModel();
+    /**
+     * The non-editable table model used in this application
+     */
+    private ETTableModel dtm = new ETTableModel();
+    /**
+     * A vector of the sound library entries
+     */
     private Vector<SoundLibraryEntry> stored_results;
+
+    /**
+     * The streaming thread initialized to null
+     */
+    private StreamThread stream_thread = null;
 
     /** Creates new form NewMain */
     public NewMain() {
 
+        //Adds the titles to the TableModel
         columnNames.add( "Title" );
         columnNames.add( "Artist" );
         columnNames.add( "Genre" );
@@ -36,7 +51,8 @@ public class NewMain extends javax.swing.JFrame {
    
         initComponents();
 
-        dtm = new DefaultTableModel( new Vector<Vector<String>>(), columnNames );
+        //creates the table model
+        dtm = new ETTableModel( new Vector<Vector<String>>(), columnNames );
 
         try{
             //SoundLibraryQuery query = new SoundLibraryQuery( "SELECT * FROM library WHERE MATCH (Tags) AGAINST ('plop' IN BOOLEAN MODE)" );
@@ -46,6 +62,7 @@ public class NewMain extends javax.swing.JFrame {
             //for( SoundLibraryEntry entry: results ){
             //    System.out.println( entry.getURL().toURI() + " " + entry.getTitle() + " " + entry.getAuthor() + " " + entry.getGenre() + " " + entry.getTags() );
             //}
+            //Adds the rows to the table
             for( SoundLibraryEntry entry: results ){
                 Vector<String> new_row = new Vector<String>();
                 new_row.add( entry.getTitle() );
@@ -61,6 +78,7 @@ public class NewMain extends javax.swing.JFrame {
            System.err.println( ex );
         }
 
+        //Sets the jTable to the ETTableModel
         jtbleSongs.setModel(dtm);
         
     }
@@ -74,17 +92,32 @@ public class NewMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jFrame1 = new javax.swing.JFrame();
+        jScrollPane = new javax.swing.JScrollPane();
         jtbleSongs = new javax.swing.JTable();
         jtbleSongs.setModel(new DefaultTableModel());
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jStreambtn = new javax.swing.JButton();
+        jStopbttn = new javax.swing.JButton();
+        jMenuBar = new javax.swing.JMenuBar();
         jmnuFile = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jmnuExit = new javax.swing.JMenuItem();
         jmnuEdit = new javax.swing.JMenu();
         jmnuSearch = new javax.swing.JMenuItem();
 
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 335, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 204, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sound Library");
 
         jtbleSongs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,7 +127,21 @@ public class NewMain extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
-        jScrollPane1.setViewportView(jtbleSongs);
+        jScrollPane.setViewportView(jtbleSongs);
+
+        jStreambtn.setText("Stream");
+        jStreambtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStreambtnActionPerformed(evt);
+            }
+        });
+
+        jStopbttn.setText("Stop");
+        jStopbttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStopbttnActionPerformed(evt);
+            }
+        });
 
         jmnuFile.setText("File");
 
@@ -111,7 +158,7 @@ public class NewMain extends javax.swing.JFrame {
         });
         jmnuFile.add(jmnuExit);
 
-        jMenuBar1.add(jmnuFile);
+        jMenuBar.add(jmnuFile);
 
         jmnuEdit.setText("Edit");
 
@@ -119,9 +166,9 @@ public class NewMain extends javax.swing.JFrame {
         jmnuSearch.setText("Search...");
         jmnuEdit.add(jmnuSearch);
 
-        jMenuBar1.add(jmnuEdit);
+        jMenuBar.add(jmnuEdit);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,15 +176,22 @@ public class NewMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jStreambtn)
+                    .addComponent(jStopbttn))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jStreambtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jStopbttn)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,6 +205,36 @@ public class NewMain extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jmnuExitActionPerformed
 
+    private void jStreambtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStreambtnActionPerformed
+        // TODO add your handling code here:
+        try{
+                   URL stream_url = stored_results.elementAt( jtbleSongs.getSelectedRow() ).getURL();
+                   if( stream_thread == null ){
+                       stream_thread = new StreamThread( stream_url );
+                   }
+                   else{
+                       stream_thread.setStream( stream_url );
+                   }
+                   //updateStatusText( "Streaming: " + dtm.getValueAt( jtbleSongs.getSelectedRow(), 0 ) );
+                   stream_thread.run();
+               }
+               catch( Exception exception ){
+                   System.err.println( exception );
+               }
+    }//GEN-LAST:event_jStreambtnActionPerformed
+
+    private void jStopbttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStopbttnActionPerformed
+        // TODO add your handling code here:
+        stopAudio();
+    }//GEN-LAST:event_jStopbttnActionPerformed
+
+    /**
+     * Stops the streaming of a thread, if there is one streaming.
+     */
+    public void stopAudio(){
+        if( stream_thread != null ) stream_thread.requestStop();
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -163,10 +247,16 @@ public class NewMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JFrame jFrame1;
+    private javax.swing.JMenuBar jMenuBar;
     /** Upload menu item brings up the upload dialog box */
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JScrollPane jScrollPane1;
+    /** The ScrollPane that holds the TableModel */
+    private javax.swing.JScrollPane jScrollPane;
+    /** Stops the Streaming of a thread */
+    private javax.swing.JButton jStopbttn;
+    /** Streams the selected sound file */
+    private javax.swing.JButton jStreambtn;
     /** Edit menu button */
     private javax.swing.JMenu jmnuEdit;
     /** Exit menu item */
