@@ -20,7 +20,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 
-
 /**
  *
  * @author James
@@ -32,9 +31,10 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
     private JLabel progress_text;
     private JButton stream_button;
     private JButton stop_button;
+    private JButton reload;
 
     private StreamThread stream_thread = null;
-    private Thread player_thread = null;
+//    private Thread player_thread = null;
 
     private JTable dataTable;
     private DefaultTableModel tableModel;
@@ -42,17 +42,14 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
 
     private Vector<SoundLibraryEntry> stored_results;
 
-//    public static final JMMusicMain Singleton = new JMMusicMain();
-
+    public static final JMMusicMain Singleton = new JMMusicMain();
 
     /** Creates new form JMMusicMain */
     public JMMusicMain() {
-        super( "Sound Library Client" );
+        super( "James' Sound Library Client" );
         initComponents();
 
-
         //Initialize the JFrame and basic settings
-
         setSize( 640, 480 );
         Dimension d = new Dimension(660, 450);
         Dimension d2 = new Dimension(800,600);
@@ -89,8 +86,8 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
         stream_button = new JButton( "Stream" );
         stream_button.addActionListener( new ActionListener(){
            public void actionPerformed( ActionEvent e ){
-               //stream_button.setEnabled( false );
-               //stop_button.setEnabled( true );
+               stream_button.setEnabled( false );
+               stop_button.setEnabled( true );               
                try{
                    URL stream_url = stored_results.elementAt( dataTable.getSelectedRow() ).getURL();
 
@@ -104,18 +101,18 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
 //                   stream_thread.run();
                    Thread player_thread = new java.lang.Thread(stream_thread);
                    player_thread.start();
-
                }
                catch( Exception exception ){
                    System.err.println( exception );
                }
            }
         });
+
         stop_button = new JButton( "Stop" );
         stop_button.addActionListener( new ActionListener(){
            public void actionPerformed( ActionEvent e ){
-//               stream_button.setEnabled( true );
-//               stop_button.setEnabled( false );
+               stream_button.setEnabled( true );
+               stop_button.setEnabled( false );
                try{
                     if( ( stream_thread != null ) &&
                          (stream_thread.isAlive() ) ){
@@ -131,23 +128,40 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
         });
 //        stop_button.setEnabled( false );
 
+        reload = new JButton("Reload");
+        reload.addActionListener( new ActionListener(){
+           public void actionPerformed( ActionEvent e ){
+               updateList();
+           }
+        });
+
         //Create the status box and add it to the main panel
         progress_text = new JLabel();
         progress_text.setText( "Stopped." );
+        JPanel containPanel = new JPanel();
+        stop_button.setEnabled(false);
+        containPanel.setLayout(new FlowLayout());
+        containPanel.add(stream_button);
+        containPanel.add(stop_button);
+        containPanel.add(reload);
+        control_panel.add(containPanel, BorderLayout.WEST);
+        control_panel.add(progress_text, BorderLayout.CENTER);
+        result_panel.add(control_panel, BorderLayout.SOUTH);
 
-        control_panel.add( stream_button, BorderLayout.WEST );
-        control_panel.add( progress_text, BorderLayout.CENTER );
-        control_panel.add( stop_button, BorderLayout.EAST );
+//        control_panel.add( stream_button, BorderLayout.WEST );
+//        control_panel.add( progress_text, BorderLayout.CENTER );
+//        control_panel.add( stop_button, BorderLayout.EAST );
+//        control_panel.add(reload, BorderLayout.EAST);
 
-        result_panel.add( control_panel, BorderLayout.SOUTH );
+//        result_panel.add( control_panel, BorderLayout.SOUTH );
 
-        main_panel.add( "Stream Index", result_panel );
+        main_panel.add( "Songs", result_panel );
 
         JMSearchPanel search_panel = new JMSearchPanel();
         main_panel.add( "Search", search_panel );
 
         JMUploadPanel upload_panel = new JMUploadPanel();
-        main_panel.add( "Upload", upload_panel );
+        main_panel.add( "Add", upload_panel );
 
         //Set the main panel to be the content pane of the main frame
         setContentPane( main_panel );
@@ -155,29 +169,30 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
         //Make this app its own WindowListener
         addWindowListener( this );
 
+        updateList();
         //Pull entries from MySQL Database
-        try{
-            //SoundLibraryQuery query = new SoundLibraryQuery( "SELECT * FROM library WHERE MATCH (Tags) AGAINST ('plop' IN BOOLEAN MODE)" );
-            SoundLibraryQuery query = new SoundLibraryQuery();
-            Vector<SoundLibraryEntry> results = query.executeQuery();
-            stored_results = results;
-            //for( SoundLibraryEntry entry: results ){
-            //    System.out.println( entry.getURL().toURI() + " " + entry.getTitle() + " " + entry.getAuthor() + " " + entry.getGenre() + " " + entry.getTags() );
-            //}
-            for( SoundLibraryEntry entry: results ){
-                Vector<String> new_row = new Vector<String>();
-                new_row.add( entry.getTitle() );
-                new_row.add( entry.getAuthor() );
-                new_row.add( entry.getGenre() );
-                new_row.add( entry.getTags() );
-                new_row.add( entry.getMimeType() );
-
-                tableModel.addRow( new_row );
-            }
-        }
-        catch( Exception ex ){
-           System.err.println( ex );
-        }
+//        try{
+//            //SoundLibraryQuery query = new SoundLibraryQuery( "SELECT * FROM library WHERE MATCH (Tags) AGAINST ('plop' IN BOOLEAN MODE)" );
+//            SoundLibraryQuery query = new SoundLibraryQuery();
+//            Vector<SoundLibraryEntry> results = query.executeQuery();
+//            stored_results = results;
+//            //for( SoundLibraryEntry entry: results ){
+//            //    System.out.println( entry.getURL().toURI() + " " + entry.getTitle() + " " + entry.getAuthor() + " " + entry.getGenre() + " " + entry.getTags() );
+//            //}
+//            for( SoundLibraryEntry entry: results ){
+//                Vector<String> new_row = new Vector<String>();
+//                new_row.add( entry.getTitle() );
+//                new_row.add( entry.getAuthor() );
+//                new_row.add( entry.getGenre() );
+//                new_row.add( entry.getTags() );
+//                new_row.add( entry.getMimeType() );
+//
+//                tableModel.addRow( new_row );
+//            }
+//        }
+//        catch( Exception ex ){
+//           System.err.println( ex );
+//        }
         //Finally, display all contents
         //paintAll( getGraphics() );
         pack();
@@ -212,20 +227,44 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
     /**
     * @param args the command line arguments
     */
-    public static void main(String args[]) {
+    public static void main(String args[]) {}
 //        JMMusicMain Singleton = new JMMusicMain();
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JMMusicMain().setVisible(true);
-            }
-        });
-    }
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new JMMusicMain().setVisible(true);
+//            }
+//        });
+//    }
 
         public void updateStatusText( String new_text ){
+            progress_text.setText( new_text );
+            repaint();
+        }
 
-        progress_text.setText( new_text );
-        repaint();
-    }
+        public void updateList(){
+            try{
+                tableModel.setRowCount(0);
+                //SoundLibraryQuery query = new SoundLibraryQuery( "SELECT * FROM library WHERE MATCH (Tags) AGAINST ('plop' IN BOOLEAN MODE)" );
+                SoundLibraryQuery query = new SoundLibraryQuery();
+                Vector<SoundLibraryEntry> results = query.executeQuery();
+                stored_results = results;
+                //for( SoundLibraryEntry entry: results ){
+                //   System.out.println( entry.getURL().toURI() + " " + entry.getTitle() + " " + entry.getAuthor() + " " + entry.getGenre() + " " + entry.getTags() );
+                //}
+                for( SoundLibraryEntry entry: results ){
+                    Vector<String> new_row = new Vector<String>();
+                    new_row.add( entry.getTitle() );
+                    new_row.add( entry.getAuthor() );
+                    new_row.add( entry.getGenre() );
+                    new_row.add( entry.getTags() );
+                    new_row.add( entry.getMimeType() );
+                    tableModel.addRow( new_row );
+                }
+            }
+            catch( Exception ex ){
+                System.err.println( ex );
+            }
+        }
 
     public void stopAudio(){
         stream_thread.requestStop();
@@ -249,16 +288,15 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
         catch( Exception exception ){
             System.err.println( exception );
         }
-
         main_panel.setSelectedIndex( 0 );
     }
-
 
     public void windowOpened(WindowEvent arg0) {}
 
     public void windowClosing(WindowEvent arg0) {
         if(stream_thread != null ){stopAudio();}
         if( isDisplayable() ) dispose();
+        System.exit(0);
     }
 
     public void windowClosed(WindowEvent arg0) {}
