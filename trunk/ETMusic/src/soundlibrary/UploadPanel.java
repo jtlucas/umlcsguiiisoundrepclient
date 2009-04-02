@@ -1,6 +1,6 @@
 package soundlibrary;
 
-import edu.uml.sl.*;
+//import edu.uml.sl.*;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

@@ -1,6 +1,6 @@
 package soundlibrary;
 
-import edu.uml.sl.*;
+//import edu.uml.sl.*;
 
 import java.net.*;
 import java.awt.*;
