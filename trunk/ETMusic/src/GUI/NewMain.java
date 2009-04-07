@@ -11,9 +11,11 @@
 
 package GUI;
 
+import GUI.ETTableModel;
 import java.net.URL;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import soundlibrary.*;
 
 /**
  *
