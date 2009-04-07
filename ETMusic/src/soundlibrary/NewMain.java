@@ -92,7 +92,6 @@ public class NewMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrame1 = new javax.swing.JFrame();
         jScrollPane = new javax.swing.JScrollPane();
         jtbleSongs = new javax.swing.JTable();
         jtbleSongs.setModel(new DefaultTableModel());
@@ -105,21 +104,10 @@ public class NewMain extends javax.swing.JFrame {
         jtxtSearch = new java.awt.TextField();
         jMenuBar = new javax.swing.JMenuBar();
         jmnuFile = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmnuUpload = new javax.swing.JMenuItem();
         jmnuExit = new javax.swing.JMenuItem();
         jmnuEdit = new javax.swing.JMenu();
         jmnuSearch = new javax.swing.JMenuItem();
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 335, Short.MAX_VALUE)
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 204, Short.MAX_VALUE)
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sound Library");
@@ -133,6 +121,8 @@ public class NewMain extends javax.swing.JFrame {
             }
         ));
         jScrollPane.setViewportView(jtbleSongs);
+
+        getContentPane().add(jScrollPane);
 
         jpnlMusicPlayer.setBorder(javax.swing.BorderFactory.createTitledBorder("Music Player"));
 
@@ -180,13 +170,17 @@ public class NewMain extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        getContentPane().add(jpnlMusicPlayer);
+
         jlblSearch.setText("Search");
+        getContentPane().add(jlblSearch);
+        getContentPane().add(jtxtSearch);
 
         jmnuFile.setText("File");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Upload...");
-        jmnuFile.add(jMenuItem1);
+        jmnuUpload.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        jmnuUpload.setText("Upload...");
+        jmnuFile.add(jmnuUpload);
 
         jmnuExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
         jmnuExit.setText("Exit");
@@ -203,40 +197,16 @@ public class NewMain extends javax.swing.JFrame {
 
         jmnuSearch.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
         jmnuSearch.setText("Advanced Search...");
+        jmnuSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmnuSearchActionPerformed(evt);
+            }
+        });
         jmnuEdit.add(jmnuSearch);
 
         jMenuBar.add(jmnuEdit);
 
         setJMenuBar(jMenuBar);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jpnlMusicPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtxtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jpnlMusicPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -272,6 +242,10 @@ public class NewMain extends javax.swing.JFrame {
         stopAudio();
     }//GEN-LAST:event_jStopbttnActionPerformed
 
+    private void jmnuSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmnuSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmnuSearchActionPerformed
+
     /**
      * Stops the streaming of a thread, if there is one streaming.
      */
@@ -291,10 +265,7 @@ public class NewMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFrame jFrame1;
     private javax.swing.JMenuBar jMenuBar;
-    /** Upload menu item brings up the upload dialog box */
-    private javax.swing.JMenuItem jMenuItem1;
     /** The ScrollPane that holds the TableModel */
     private javax.swing.JScrollPane jScrollPane;
     /** Stops the Streaming of a thread */
@@ -315,6 +286,8 @@ public class NewMain extends javax.swing.JFrame {
     private javax.swing.JMenu jmnuFile;
     /** Search menu item */
     private javax.swing.JMenuItem jmnuSearch;
+    /** Upload menu item brings up the upload dialog box */
+    private javax.swing.JMenuItem jmnuUpload;
     /** Panel that holds the music player UI */
     private javax.swing.JPanel jpnlMusicPlayer;
     /** table that holds the song data */
