@@ -122,7 +122,7 @@ public class NewMain extends javax.swing.JFrame {
         ));
         jScrollPane.setViewportView(jtbleSongs);
 
-        getContentPane().add(jScrollPane);
+        getContentPane().add(jScrollPane, java.awt.BorderLayout.CENTER);
 
         jpnlMusicPlayer.setBorder(javax.swing.BorderFactory.createTitledBorder("Music Player"));
 
@@ -148,9 +148,9 @@ public class NewMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jpnlMusicPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpnlMusicPlayerLayout.createSequentialGroup()
-                        .addComponent(jStreambtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jStreambtn, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jStopbttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jStopbttn, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                         .addGap(149, 149, 149))
                     .addGroup(jpnlMusicPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jlblSongTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -170,11 +170,11 @@ public class NewMain extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jpnlMusicPlayer);
+        getContentPane().add(jpnlMusicPlayer, java.awt.BorderLayout.PAGE_START);
 
         jlblSearch.setText("Search");
-        getContentPane().add(jlblSearch);
-        getContentPane().add(jtxtSearch);
+        getContentPane().add(jlblSearch, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(jtxtSearch, java.awt.BorderLayout.LINE_END);
 
         jmnuFile.setText("File");
 
