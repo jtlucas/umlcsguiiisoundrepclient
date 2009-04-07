@@ -11,11 +11,9 @@
 
 package SoundPack;
 
-import edu.uml.sl.*;
+import edu.uml.cs.sl.*;
 
 import java.util.Vector;
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 
@@ -29,7 +27,8 @@ public class JMSearchPanel extends javax.swing.JPanel {
 //    private Object jbttnSearch;
 //    private Object jlblFind;
     private enum search_type{TITLE, AUTHOR, GENRE, TAGS, CUSTOM}
-    private search_type current_search = search_type.TITLE;
+//    private search_type current_search = search_type.TITLE;
+    private search_type current_search;
 
 
     /** Creates new form JMSearchPanel */
@@ -46,16 +45,16 @@ public class JMSearchPanel extends javax.swing.JPanel {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    jcbSearching = new javax.swing.JComboBox();
     jtfSearchText = new javax.swing.JTextField();
     jlblSearchBy = new javax.swing.JLabel();
     jlblFind = new javax.swing.JLabel();
     jbttnSearch = new javax.swing.JButton();
+    jScrollPane1 = new javax.swing.JScrollPane();
+    jlSearch = new javax.swing.JList();
 
-    jcbSearching.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Title", "Artist", "Genre", "Tags", "Custom" }));
-    jcbSearching.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        jcbSearchingActionPerformed(evt);
+    jtfSearchText.addKeyListener(new java.awt.event.KeyAdapter() {
+      public void keyPressed(java.awt.event.KeyEvent evt) {
+        jtfSearchTextKeyPressed(evt);
       }
     });
 
@@ -70,6 +69,18 @@ public class JMSearchPanel extends javax.swing.JPanel {
       }
     });
 
+    jlSearch.setModel(new javax.swing.AbstractListModel() {
+      String[] strings = { "Title", "Artist", "Genre", "Tags", "Custom" };
+      public int getSize() { return strings.length; }
+      public Object getElementAt(int i) { return strings[i]; }
+    });
+    jlSearch.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+      public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+        jlSearchValueChanged(evt);
+      }
+    });
+    jScrollPane1.setViewportView(jlSearch);
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
@@ -77,50 +88,37 @@ public class JMSearchPanel extends javax.swing.JPanel {
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jlblSearchBy)
-          .addComponent(jlblFind)
-          .addComponent(jbttnSearch)
-          .addComponent(jtfSearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jcbSearching, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addContainerGap(88, Short.MAX_VALUE))
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jlblSearchBy)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jlblFind)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jtfSearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(jbttnSearch))
+        .addContainerGap(28, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(jlblSearchBy)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jcbSearching, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(33, 33, 33)
-        .addComponent(jlblFind)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jtfSearchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(37, 37, 37)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jlblSearchBy)
+          .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(24, 24, 24)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jlblFind)
+          .addComponent(jtfSearchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(18, 18, 18)
         .addComponent(jbttnSearch)
-        .addContainerGap(116, Short.MAX_VALUE))
+        .addContainerGap(106, Short.MAX_VALUE))
     );
   }// </editor-fold>//GEN-END:initComponents
 
-    private void jcbSearchingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSearchingActionPerformed
-        // TODO add your handling code here:
-        int sel = jcbSearching.getSelectedIndex();
-        System.out.println(sel);
-        if(sel == 0){
-            current_search = search_type.TITLE;
-        }
-        else if(sel == 1){
-            current_search = search_type.AUTHOR;
-        }
-        else if(sel == 2){
-            current_search = search_type.GENRE;
-        }
-        else if(sel == 3){
-            current_search = search_type.TAGS;
-        }
-        else if(sel == 4){
-            current_search = search_type.CUSTOM;
-        }
-}//GEN-LAST:event_jcbSearchingActionPerformed
+    public void searchFor(ActionEvent evt){
+        jbttnSearchActionPerformed(evt);
+    }
 
     private void jbttnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbttnSearchActionPerformed
         // TODO add your handling code here:
@@ -157,10 +155,35 @@ public class JMSearchPanel extends javax.swing.JPanel {
                }
     }//GEN-LAST:event_jbttnSearchActionPerformed
 
+    private void jlSearchValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlSearchValueChanged
+        // TODO add your handling code here:
+        int sel = jlSearch.getSelectedIndex();
+        if(sel == 0){
+            current_search = search_type.TITLE;
+        } else if(sel == 1){
+            current_search = search_type.AUTHOR;
+        } else if(sel == 2){
+            current_search = search_type.GENRE;
+        } else if(sel == 3){
+            current_search = search_type.TAGS;
+        } else if(sel == 4){
+            current_search = search_type.CUSTOM;
+        }
+        jtfSearchText.requestFocus();
+    }//GEN-LAST:event_jlSearchValueChanged
+
+    private void jtfSearchTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfSearchTextKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            searchFor(null);
+        }
+    }//GEN-LAST:event_jtfSearchTextKeyPressed
+
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JButton jbttnSearch;
-  private javax.swing.JComboBox jcbSearching;
+  private javax.swing.JList jlSearch;
   private javax.swing.JLabel jlblFind;
   private javax.swing.JLabel jlblSearchBy;
   private javax.swing.JTextField jtfSearchText;

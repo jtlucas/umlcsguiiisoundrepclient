@@ -22,41 +22,48 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jlblTags" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jtfTags" linkSize="3" pref="311" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jbttnOpen" linkSize="5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                              <Component id="jbttnUpload" linkSize="5" pref="81" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jlblArtist" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="jlblArtist" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jtfArtist" linkSize="3" min="-2" pref="36" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jlblGenre" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jtfGenre" linkSize="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Component id="jlblFile" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jtfFile" linkSize="3" min="-2" pref="311" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jlblTrack" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jtfTitle" linkSize="3" min="-2" pref="44" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlblTags" min="-2" pref="29" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jtfTags" linkSize="3" pref="311" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlblGenre" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jtfGenre" linkSize="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jbttnOpen" linkSize="5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="jbttnUpload" linkSize="5" pref="81" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="220" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jlblMessage" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="338" max="32767" attributes="0"/>
+                      <EmptySpace pref="316" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -67,37 +74,37 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlblFile" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jtfFile" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlblFile" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlblTrack" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jtfTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlblTrack" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlblArtist" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jtfArtist" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlblArtist" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlblGenre" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jtfGenre" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlblGenre" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlblTags" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jtfTags" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlblTags" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="51" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Component id="jlblMessage" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbttnOpen" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbttnUpload" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="44" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -105,27 +112,27 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jlblFile">
       <Properties>
-        <Property name="text" type="java.lang.String" value="File Name:"/>
+        <Property name="text" type="java.lang.String" value="File Name"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlblTrack">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Track Title:"/>
+        <Property name="text" type="java.lang.String" value="Track Title"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlblArtist">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Artist:"/>
+        <Property name="text" type="java.lang.String" value="Artist"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlblGenre">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Genre:"/>
+        <Property name="text" type="java.lang.String" value="Genre"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlblTags">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tags:"/>
+        <Property name="text" type="java.lang.String" value="Tags"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfFile">

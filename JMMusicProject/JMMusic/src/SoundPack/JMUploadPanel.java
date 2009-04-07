@@ -11,7 +11,7 @@
 
 package SoundPack;
 
-import edu.uml.sl.*;
+import edu.uml.cs.sl.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -93,15 +93,15 @@ public class JMUploadPanel extends javax.swing.JPanel {
     jbttnUpload = new javax.swing.JButton();
     jlblMessage = new javax.swing.JLabel();
 
-    jlblFile.setText("File Name:");
+    jlblFile.setText("File Name");
 
-    jlblTrack.setText("Track Title:");
+    jlblTrack.setText("Track Title");
 
-    jlblArtist.setText("Artist:");
+    jlblArtist.setText("Artist");
 
-    jlblGenre.setText("Genre:");
+    jlblGenre.setText("Genre");
 
-    jlblTags.setText("Tags:");
+    jlblTags.setText("Tags");
 
     jbttnOpen.setText("Open");
     jbttnOpen.addActionListener(new java.awt.event.ActionListener() {
@@ -129,36 +129,41 @@ public class JMUploadPanel extends javax.swing.JPanel {
           .addGroup(layout.createSequentialGroup()
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(layout.createSequentialGroup()
-                .addComponent(jlblTags)
-                .addGap(18, 18, 18)
-                .addComponent(jtfTags, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
-              .addGroup(layout.createSequentialGroup()
-                .addComponent(jbttnOpen)
-                .addGap(2, 2, 2)
-                .addComponent(jbttnUpload, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
-              .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addComponent(jlblArtist)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfArtist, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
               .addGroup(layout.createSequentialGroup()
-                .addComponent(jlblGenre)
-                .addGap(18, 18, 18)
-                .addComponent(jtfGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-              .addGroup(layout.createSequentialGroup()
                 .addComponent(jlblFile)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfFile, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
               .addGroup(layout.createSequentialGroup()
                 .addComponent(jlblTrack)
-                .addGap(18, 18, 18)
-                .addComponent(jtfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGap(24, 24, 24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addGroup(layout.createSequentialGroup()
+                    .addComponent(jlblTags, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jtfTags, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
+                  .addGroup(layout.createSequentialGroup()
+                    .addComponent(jlblGenre)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jtfGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+            .addGap(20, 20, 20))
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jbttnOpen)
+            .addGap(2, 2, 2)
+            .addComponent(jbttnUpload, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+            .addGap(220, 220, 220))
           .addGroup(layout.createSequentialGroup()
             .addComponent(jlblMessage)
-            .addContainerGap(338, Short.MAX_VALUE))))
+            .addContainerGap(316, Short.MAX_VALUE))))
     );
 
-    layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jlblArtist, jlblFile, jlblGenre, jlblTags, jlblTrack});
+    layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jlblFile, jlblTrack});
 
     layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jtfArtist, jtfFile, jtfGenre, jtfTags, jtfTitle});
 
@@ -169,31 +174,31 @@ public class JMUploadPanel extends javax.swing.JPanel {
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jlblFile)
-          .addComponent(jtfFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(jtfFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jlblFile))
         .addGap(18, 18, 18)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jlblTrack)
-          .addComponent(jtfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(jtfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jlblTrack))
         .addGap(18, 18, 18)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jlblArtist)
-          .addComponent(jtfArtist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(jtfArtist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jlblArtist))
         .addGap(18, 18, 18)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jlblGenre)
-          .addComponent(jtfGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(jtfGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jlblGenre))
         .addGap(18, 18, 18)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jlblTags)
-          .addComponent(jtfTags, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+          .addComponent(jtfTags, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jlblTags))
+        .addGap(25, 25, 25)
         .addComponent(jlblMessage)
-        .addGap(18, 18, 18)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jbttnOpen)
           .addComponent(jbttnUpload))
-        .addContainerGap())
+        .addContainerGap(44, Short.MAX_VALUE))
     );
   }// </editor-fold>//GEN-END:initComponents
 
