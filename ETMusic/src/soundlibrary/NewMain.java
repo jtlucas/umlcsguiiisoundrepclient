@@ -96,8 +96,13 @@ public class NewMain extends javax.swing.JFrame {
         jScrollPane = new javax.swing.JScrollPane();
         jtbleSongs = new javax.swing.JTable();
         jtbleSongs.setModel(new DefaultTableModel());
+        jpnlMusicPlayer = new javax.swing.JPanel();
         jStreambtn = new javax.swing.JButton();
         jStopbttn = new javax.swing.JButton();
+        jbrSongProgress = new javax.swing.JProgressBar();
+        jlblSongTitle = new java.awt.Label();
+        jlblSearch = new java.awt.Label();
+        jtxtSearch = new java.awt.TextField();
         jMenuBar = new javax.swing.JMenuBar();
         jmnuFile = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -129,6 +134,8 @@ public class NewMain extends javax.swing.JFrame {
         ));
         jScrollPane.setViewportView(jtbleSongs);
 
+        jpnlMusicPlayer.setBorder(javax.swing.BorderFactory.createTitledBorder("Music Player"));
+
         jStreambtn.setText("Stream");
         jStreambtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +149,38 @@ public class NewMain extends javax.swing.JFrame {
                 jStopbttnActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout jpnlMusicPlayerLayout = new javax.swing.GroupLayout(jpnlMusicPlayer);
+        jpnlMusicPlayer.setLayout(jpnlMusicPlayerLayout);
+        jpnlMusicPlayerLayout.setHorizontalGroup(
+            jpnlMusicPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnlMusicPlayerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpnlMusicPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpnlMusicPlayerLayout.createSequentialGroup()
+                        .addComponent(jStreambtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jStopbttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(149, 149, 149))
+                    .addGroup(jpnlMusicPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jlblSongTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbrSongProgress, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jpnlMusicPlayerLayout.setVerticalGroup(
+            jpnlMusicPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnlMusicPlayerLayout.createSequentialGroup()
+                .addComponent(jlblSongTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbrSongProgress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jpnlMusicPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jStreambtn)
+                    .addComponent(jStopbttn))
+                .addContainerGap())
+        );
+
+        jlblSearch.setText("Search");
 
         jmnuFile.setText("File");
 
@@ -163,7 +202,7 @@ public class NewMain extends javax.swing.JFrame {
         jmnuEdit.setText("Edit");
 
         jmnuSearch.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        jmnuSearch.setText("Search...");
+        jmnuSearch.setText("Advanced Search...");
         jmnuEdit.add(jmnuSearch);
 
         jMenuBar.add(jmnuEdit);
@@ -178,21 +217,25 @@ public class NewMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jStopbttn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jStreambtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jpnlMusicPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtxtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jStreambtn)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jStopbttn)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jpnlMusicPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -258,6 +301,12 @@ public class NewMain extends javax.swing.JFrame {
     private javax.swing.JButton jStopbttn;
     /** Streams the selected sound file */
     private javax.swing.JButton jStreambtn;
+    /** Shows the songs progress */
+    private javax.swing.JProgressBar jbrSongProgress;
+    /** label to show the user where to search */
+    private java.awt.Label jlblSearch;
+    /** holds the title of the song currently playing */
+    private java.awt.Label jlblSongTitle;
     /** Edit menu button */
     private javax.swing.JMenu jmnuEdit;
     /** Exit menu item */
@@ -266,8 +315,12 @@ public class NewMain extends javax.swing.JFrame {
     private javax.swing.JMenu jmnuFile;
     /** Search menu item */
     private javax.swing.JMenuItem jmnuSearch;
+    /** Panel that holds the music player UI */
+    private javax.swing.JPanel jpnlMusicPlayer;
     /** table that holds the song data */
     private javax.swing.JTable jtbleSongs;
+    /** text field used to search by song title */
+    private java.awt.TextField jtxtSearch;
     // End of variables declaration//GEN-END:variables
 
 }
