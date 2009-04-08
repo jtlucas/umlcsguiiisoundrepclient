@@ -1,0 +1,13 @@
+<root>
+    <order></order>
+    <field><name>FileName</name><caption>Filename</caption><show>false</show>
+    <search>false</search><width>20</width></field>
+    <field><name>Tags</name><caption>Tags</caption><show>true</show>
+    <search>true</search><width>20</width></field>
+    <field><name>Title</name><caption>Title</caption><show>true</show>
+    <search>false</search><width>20</width></field>
+    <field><name>Author</name><caption>Author</caption><show>true</show>
+    <search>false</search><width>20</width></field>
+    <field><name>Genre</name><caption>Genre</caption><show>true</show>
+    <search>false</search><width>20</width></field>
+</root>
