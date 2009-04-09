@@ -146,6 +146,7 @@ public class NewMain extends javax.swing.JFrame {
         });
 
         jStopbttn.setText("Stop");
+        jStopbttn.setEnabled(false);
         jStopbttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jStopbttnActionPerformed(evt);
@@ -267,11 +268,15 @@ public class NewMain extends javax.swing.JFrame {
                catch( Exception exception ){
                    System.err.println( exception );
                }
+        jStopbttn.setEnabled(true);
+        jStreambtn.setEnabled(false);
     }//GEN-LAST:event_jStreambtnActionPerformed
 
     private void jStopbttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStopbttnActionPerformed
         // TODO add your handling code here:
         stopAudio();
+        jStopbttn.setEnabled(false);
+        jStreambtn.setEnabled(true);
     }//GEN-LAST:event_jStopbttnActionPerformed
 
     /**
