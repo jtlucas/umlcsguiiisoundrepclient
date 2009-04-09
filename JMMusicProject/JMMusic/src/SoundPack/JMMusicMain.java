@@ -14,6 +14,7 @@ package SoundPack;
 import edu.uml.cs.sl.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.net.URL;
 import java.util.Vector;
 import javax.swing.*;
@@ -32,7 +33,7 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
 //    private JButton stream_button;
 //    private JButton stop_button;
 //    private JButton reload;
-
+//    private JPanel result_panel = null;
     private StreamThread stream_thread = null;
 //    private Thread player_thread = null;
 
@@ -49,7 +50,6 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
         super( "James' Sound Library Client" );
         SetNetBeansCompatibleUIManager();
         initComponents();
-        
 
         //Initialize the JFrame and basic settings
         setSize( 640, 480 );
@@ -63,6 +63,7 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
         main_panel = new JTabbedPane();
 
         JPanel result_panel = new JPanel( new BorderLayout() );
+//        result_panel = new JPanel(new BorderLayout());
 
         JPanel list_panel = new JPanel();
 
@@ -92,21 +93,18 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
 //               stop_button.setEnabled( true );
                try{
                    URL stream_url = stored_results.elementAt( dataTable.getSelectedRow() ).getURL();
-//                   Thread player_thread = new java.lang.Thread(stream_thread);
+//                   new JMAudioFunctions().saveFile(stream_url.toString());
 
-
-                   if( stream_thread != null ){
-                       stream_thread.requestStop();}
-////                       stream_thread.setStream( stream_url );
-//                   }
-//                   else{
+                   if( stream_thread == null ){
                        stream_thread = new StreamThread( stream_url );
-//                   }
-                   
-                   updateStatusText( "Streaming: " + tableModel.getValueAt( dataTable.getSelectedRow(), 0 ) );
+                   }
+                   else{
+                       stream_thread.setStream( stream_url );
+                   }
 
-                   stream_thread.start();
-//                   player_thread.start();
+                   updateStatusText( "Streaming: " + tableModel.getValueAt( dataTable.getSelectedRow(), 0 ) );
+                   Thread player_thread = new java.lang.Thread(stream_thread);
+                   player_thread.start();
                }
                catch( Exception exception ){
                    System.err.println( exception );
@@ -115,23 +113,24 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
         });
 
 //        stop_button = new JButton( "Stop" );
-//        stop_button.addActionListener( new ActionListener(){
-//           public void actionPerformed( ActionEvent e ){
+        stop_button.addActionListener( new ActionListener(){
+           public void actionPerformed( ActionEvent e ){
 //               stream_button.setEnabled( true );
 //               stop_button.setEnabled( false );
-//               try{
-//                    if( ( stream_thread != null ) &&
-//                         (stream_thread.isAlive() ) ){
+               try{
+                    if( ( stream_thread != null ) &&
+                         (stream_thread.isAlive() ) ){
 //                        stream_thread.requestStop();
-//                    }
-//                    updateStatusText( "Stopped." );
-//                    stopAudio();
-//               }
-//               catch( Exception exception ){
-//                   System.err.println( exception );
-//               }
-//           }
-//        });
+//                        stopAudio();
+                    }
+                    updateStatusText( "Stopped." );
+                    stopAudio();
+               }
+               catch( Exception exception ){
+                   System.err.println( exception );
+               }
+           }
+        });
 //        stop_button.setEnabled( false );
 
 //        reload = new JButton("Refresh List");
@@ -148,7 +147,7 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
 //        stop_button.setEnabled(false);
         containPanel.setLayout(new FlowLayout());
         containPanel.add(stream_button);
-//        containPanel.add(stop_button);
+        containPanel.add(stop_button);
         containPanel.add(reload);
         control_panel.add(containPanel, BorderLayout.WEST);
         control_panel.add(progress_text, BorderLayout.CENTER);
@@ -172,10 +171,36 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
         //Set the main panel to be the content pane of the main frame
         setContentPane( main_panel );
 
+        int tabCount = main_panel.getTabCount();
+        for(int i=0; i< tabCount; i++){
+            addTabPanel(i);
+        }
+        main_panel.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
+//        main_panel.setTabPlacement(JTabbedPane.BOTTOM);
+
+
+//        JPanel tabPanel = new JPanel();
+//        JLabel jlbl = new JLabel(main_panel.getTitleAt(1));
+//        JButton jbttn = new JButton("X");
+//        jbttn.addActionListener(new java.awt.event.ActionListener() {
+//
+//            public void actionPerformed(ActionEvent e) {
+//                main_panel.remove(1);
+//            }
+//        });
+//        tabPanel.setLayout(new FlowLayout());
+//        tabPanel.add(jlbl);
+//        tabPanel.add(jbttn);
+//        main_panel.setTabComponentAt(1, tabPanel);
+
         //Make this app its own WindowListener
         addWindowListener( this );
 
+
         updateList();
+        dataTable.setAutoCreateRowSorter(true);
+
+
         //Pull entries from MySQL Database
 //        try{
 //            //SoundLibraryQuery query = new SoundLibraryQuery( "SELECT * FROM library WHERE MATCH (Tags) AGAINST ('plop' IN BOOLEAN MODE)" );
@@ -220,6 +245,7 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
     stream_button = new javax.swing.JButton();
     reload = new javax.swing.JButton();
     progress_text = new javax.swing.JLabel();
+    stop_button = new javax.swing.JButton();
     jmbMenu = new javax.swing.JMenuBar();
     jmFile = new javax.swing.JMenu();
     jmQuit = new javax.swing.JMenuItem();
@@ -231,8 +257,10 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
     jmiTags = new javax.swing.JMenuItem();
     jmiCustom = new javax.swing.JMenuItem();
     jmUpload = new javax.swing.JMenu();
-    jMenuItem1 = new javax.swing.JMenuItem();
+    jmiChoose = new javax.swing.JMenuItem();
     jMenuItem2 = new javax.swing.JMenuItem();
+    jmHelp = new javax.swing.JMenu();
+    jmiAbout = new javax.swing.JMenuItem();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -258,6 +286,9 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
 
     progress_text.setText("jLabel1");
 
+    stop_button.setText("Stop");
+    stop_button.setPreferredSize(new java.awt.Dimension(89, 23));
+
     jmFile.setText("File");
 
     jmQuit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
@@ -277,6 +308,11 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
     jmSearch.setText("Search");
 
     jmiTitle.setText("Title");
+    jmiTitle.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jmiTitleActionPerformed(evt);
+      }
+    });
     jmSearch.add(jmiTitle);
 
     jmiAuthor.setText("Artist");
@@ -295,13 +331,25 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
 
     jmUpload.setText("Upload");
 
-    jMenuItem1.setText("Choose");
-    jmUpload.add(jMenuItem1);
+    jmiChoose.setText("Choose");
+    jmiChoose.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jmiChooseActionPerformed(evt);
+      }
+    });
+    jmUpload.add(jmiChoose);
 
     jMenuItem2.setText("Upload");
     jmUpload.add(jMenuItem2);
 
     jmbMenu.add(jmUpload);
+
+    jmHelp.setText("Help");
+
+    jmiAbout.setText("About");
+    jmHelp.add(jmiAbout);
+
+    jmbMenu.add(jmHelp);
 
     setJMenuBar(jmbMenu);
 
@@ -315,16 +363,15 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
           .addGroup(layout.createSequentialGroup()
             .addComponent(stream_button, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(stop_button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(reload)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(progress_text)
-            .addGap(89, 89, 89))
+            .addGap(34, 34, 34))
           .addComponent(main_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addContainerGap(42, Short.MAX_VALUE))
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
-
-    layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {reload, stream_button});
-
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -334,7 +381,8 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(stream_button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(reload)
-          .addComponent(progress_text))
+          .addComponent(progress_text)
+          .addComponent(stop_button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addContainerGap())
     );
 
@@ -345,6 +393,18 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jmQuitActionPerformed
+
+    private void jmiTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiTitleActionPerformed
+        // TODO add your handling code here:
+        main_panel.add(new JMSearchPanel(), "Search");
+        addTabPanel(main_panel.getTabCount()-1);
+    }//GEN-LAST:event_jmiTitleActionPerformed
+
+    private void jmiChooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiChooseActionPerformed
+        // TODO add your handling code here:
+        main_panel.add(new JMUploadPanel(), "Add");
+        addTabPanel(main_panel.getTabCount()-1);
+}//GEN-LAST:event_jmiChooseActionPerformed
 
     /**
     * @param args the command line arguments
@@ -358,7 +418,32 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
 //        });
 //    }
 
-        public void updateStatusText( String new_text ){
+
+    public void addTabPanel(int i){
+        final JPanel tabPanel = new JPanel();
+        JLabel jlbl = new JLabel(main_panel.getTitleAt(i));
+        final JButton jbttn = new JButton("X");
+        jbttn.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                if(main_panel.getTabCount() == 1){
+//                    main_panel.remove(main_panel.getTabComponentAt(0).getComponentAt(jbttn.getX(), jbttn.getY()));
+//                    tabPanel.remove(jbttn);
+                }
+                else{
+                    int p = main_panel.indexAtLocation(tabPanel.getX(), tabPanel.getY());
+                    main_panel.remove(p);
+                }
+            }
+        });
+        tabPanel.setLayout(new FlowLayout());
+        tabPanel.add(jlbl);
+        tabPanel.add(jbttn);
+        main_panel.setTabComponentAt(i, tabPanel);
+    }
+
+    
+    public void updateStatusText( String new_text ){
             progress_text.setText( new_text );
             repaint();
         }
@@ -380,6 +465,8 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
                     new_row.add( entry.getGenre() );
                     new_row.add( entry.getTags() );
                     new_row.add( entry.getMimeType() );
+//                    String fileInfo = entry.getTitle()+" "+entry.getAuthor();
+//                    list.add(fileInfo);
                     tableModel.addRow( new_row );
                 }
             }
@@ -461,16 +548,18 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JTable dataTable;
-  private javax.swing.JMenuItem jMenuItem1;
   private javax.swing.JMenuItem jMenuItem2;
   private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JMenu jmEdit;
   private javax.swing.JMenu jmFile;
+  private javax.swing.JMenu jmHelp;
   private javax.swing.JMenuItem jmQuit;
   private javax.swing.JMenu jmSearch;
   private javax.swing.JMenu jmUpload;
   private javax.swing.JMenuBar jmbMenu;
+  private javax.swing.JMenuItem jmiAbout;
   private javax.swing.JMenuItem jmiAuthor;
+  private javax.swing.JMenuItem jmiChoose;
   private javax.swing.JMenuItem jmiCustom;
   private javax.swing.JMenuItem jmiGenre;
   private javax.swing.JMenuItem jmiTags;
@@ -478,6 +567,7 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
   private javax.swing.JTabbedPane main_panel;
   private javax.swing.JLabel progress_text;
   private javax.swing.JButton reload;
+  private javax.swing.JButton stop_button;
   private javax.swing.JButton stream_button;
   // End of variables declaration//GEN-END:variables
 

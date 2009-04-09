@@ -148,6 +148,10 @@ public class JMSearchPanel extends javax.swing.JPanel {
                     }
                     results = query.executeQuery();
                     JMMusicMain.Singleton.updateFromSearch( results );
+//                    new JMMusicMain().updateFromSearch(results);
+//                    this.removeAll();
+//                    this.add(new JMMusicMain().getContentPane().getComponent(0));
+                    
                     }
             }
                catch( Exception exception ){
