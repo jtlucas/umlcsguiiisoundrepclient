@@ -17,6 +17,8 @@ import java.awt.event.*;
 import java.io.File;
 import java.net.URL;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -167,6 +169,9 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
 
         JMUploadPanel upload_panel = new JMUploadPanel();
         main_panel.add( "Add", upload_panel );
+
+        JMMainListPanel list_panel2 = new JMMainListPanel();
+        main_panel.add( "Songs JList", list_panel2 );
 
         //Set the main panel to be the content pane of the main frame
         setContentPane( main_panel );
@@ -450,6 +455,7 @@ public class JMMusicMain extends javax.swing.JFrame implements WindowListener {
 
         public void updateList(){
             try{
+                dataTable.setAutoCreateRowSorter(true);
                 tableModel.setRowCount(0);
                 //SoundLibraryQuery query = new SoundLibraryQuery( "SELECT * FROM library WHERE MATCH (Tags) AGAINST ('plop' IN BOOLEAN MODE)" );
                 SoundLibraryQuery query = new SoundLibraryQuery();
